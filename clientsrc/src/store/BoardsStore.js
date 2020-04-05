@@ -14,6 +14,7 @@ export default {
       state.activeBoard = board;
     },
     addBoard(state, board) {
+      debugger;
       state.boards.push(new Board(board));
     }
   },
@@ -28,8 +29,8 @@ export default {
     },
     async createBoard({ commit }, boardData) {
       let board = await $resource.post("api/boards/", boardData);
-      commit("setBoards", board); // REVIEW You may not want this... when creating a board this sets it as the active board
       commit("addBoard", board);
+      // commit("setBoards", board); // REVIEW You may not want this... when creating a board this sets it as the active board
     },
   },
 };

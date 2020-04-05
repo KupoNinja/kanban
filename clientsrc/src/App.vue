@@ -35,7 +35,6 @@ export default {
       }
     },
     configureApp() {
-      console.log("here");
       if (this.$auth.isAuthenticated) {
         ConfigureResource(this);
         this.$store.dispatch("initUserData");

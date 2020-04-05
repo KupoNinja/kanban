@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { $resource } from "./resource";
-import BoardsStore from "./BoardsStore";
+import boardsStore from "./BoardsStore";
 
 Vue.use(Vuex);
 
@@ -29,6 +29,6 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    BoardsStore
+    boardsStore
   }
 });

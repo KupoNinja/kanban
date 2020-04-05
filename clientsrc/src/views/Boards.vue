@@ -18,6 +18,11 @@
     <div class="boards">
       <div class="card p-2 my-2 elevation-4" v-for="board in boards" :key="board.id">
         <router-link :to="{ name: 'Board', params: { boardId: board.id } }">{{ board.name }}</router-link>
+        <!-- <div
+          class="d-flex align-items-center"
+          v-if="$auth.isAuthenticated && $auth.user.email == board.creatorEmail"
+        >-->
+        <i class="fa fa-fw fa-trash text-muted mr-2 action muted" @click="deleteBoard(board)"></i>
       </div>
     </div>
   </div>
@@ -38,13 +43,22 @@ export default {
       return this.$store.state.profile;
     },
     boards() {
-      return this.$store.state.BoardsStore.boards;
+      return this.$store.state.boardsStore.boards;
     }
   },
   methods: {
     createBoard() {
       this.$store.dispatch("createBoard", this.editable);
       this.editable = new Board();
+    },
+    async deleteBoard(board) {
+      debugger;
+      let yes = await this.$confirm("Delete this board?");
+      if (!yes) {
+        return;
+      }
+      this.$store.dispatch("removeBoard", board);
+      this.$success("Board deleted!");
     }
   }
 };

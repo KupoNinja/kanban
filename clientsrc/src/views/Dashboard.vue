@@ -7,11 +7,10 @@
             v-for="route in dashboardRoutes"
             :key="route.name"
             :to="route"
-            >{{ route.displayName }}</router-link
-          >
+          >{{ route.displayName }}</router-link>
         </div>
       </div>
-      <div class="col-8 mx-auto">
+      <div class="col-8 mx-auto text-secondary">
         <div class="card shadow">
           <div class="p-3">
             <h4>{{ routeName }}</h4>
