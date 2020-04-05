@@ -40,7 +40,7 @@ export class BoardsController extends BaseController {
   async create(req, res, next) {
     try {
       // NOTE Can use ProfileService for this
-      req.body.creator = req.userInfo.email;
+      req.body.creatorEmail = req.userInfo.email;
       // TODO Create a service for this...
       let board = await dbContext.Boards.create(req.body);
       res.send(board);

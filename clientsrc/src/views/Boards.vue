@@ -8,11 +8,7 @@
       </div>
       <div class="mb-3">
         <label for="name">Description:</label>
-        <input
-          class="form-control"
-          type="text"
-          v-model="editable.description"
-        />
+        <input class="form-control" type="text" v-model="editable.description" />
       </div>
       <div class="my-3">
         <button class="btn btn-success btn-block">Create Board</button>
@@ -20,14 +16,8 @@
     </form>
     <!-- FIXME CREATE A BoardCardComponent -->
     <div class="boards">
-      <div
-        class="card p-2 my-2 elevation-4"
-        v-for="board in boards"
-        :key="board.id"
-      >
-        <router-link :to="{ name: 'Board', params: { boardId: board.id } }">{{
-          board.name
-        }}</router-link>
+      <div class="card p-2 my-2 elevation-4" v-for="board in boards" :key="board.id">
+        <router-link :to="{ name: 'Board', params: { boardId: board.id } }">{{ board.name }}</router-link>
       </div>
     </div>
   </div>
@@ -38,18 +28,18 @@ import { Board } from "../models/Board";
 
 export default {
   name: "Boards",
+  data() {
+    return {
+      editable: new Board()
+    };
+  },
   computed: {
     profile() {
       return this.$store.state.profile;
     },
     boards() {
-      return this.$store.state.boardsStore.boards;
+      return this.$store.state.BoardsStore.boards;
     }
-  },
-  data() {
-    return {
-      editable: new Board()
-    };
   },
   methods: {
     createBoard() {
