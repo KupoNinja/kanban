@@ -32,5 +32,9 @@ export default {
       commit("addBoard", board);
       // commit("setBoards", board); // REVIEW You may not want this... when creating a board this sets it as the active board
     },
+    async removeBoard({ commit }, board) {
+      await $resource.post("api/boards/", board.id);
+      commit("removeBoard")
+    }
   },
 };

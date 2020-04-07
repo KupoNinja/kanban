@@ -52,7 +52,6 @@ export default {
       this.editable = new Board();
     },
     async deleteBoard(board) {
-      debugger;
       let yes = await this.$confirm("Delete this board?");
       if (!yes) {
         return;
