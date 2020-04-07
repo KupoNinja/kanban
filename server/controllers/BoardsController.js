@@ -1,6 +1,7 @@
 import BaseController from "../utils/BaseController";
 import Auth0Provider from "@bcwdev/auth0provider";
 import { dbContext } from "../db/DbContext";
+import { boardsService } from "../services/BoardsService";
 
 export class BoardsController extends BaseController {
   constructor() {
@@ -9,15 +10,14 @@ export class BoardsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getBoards)
       .get("/:boardId", this.getBoard)
-      .post("", this.create);
+      .post("", this.create)
+      .delete("/:boardId", this.deleteBoard)
   }
 
   async getBoards(req, res, next) {
     try {
       // TODO Create a service for this...
-      let boards = await dbContext.Boards.find({
-        creatorEmail: req.userInfo.email
-      });
+      let boards = await boardsService.getBoards({ creatorEmail: req.userInfo.email });
       res.send(boards);
     } catch (error) {
       next(error);
@@ -27,7 +27,7 @@ export class BoardsController extends BaseController {
   async getBoard(req, res, next) {
     try {
       // TODO Create a service for this...
-      let board = await dbContext.Boards.findOne({
+      let board = await boardsService.getBoard({
         _id: req.params.boardId,
         creatorEmail: req.userInfo.email
       });
@@ -42,8 +42,16 @@ export class BoardsController extends BaseController {
       // NOTE Can use ProfileService for this
       req.body.creatorEmail = req.userInfo.email;
       // TODO Create a service for this...
-      let board = await dbContext.Boards.create(req.body);
+      let board = await boardsService.createBoard(req.body)
       res.send(board);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  deleteBoard(req, res, next) {
+    try {
+
     } catch (error) {
       next(error);
     }

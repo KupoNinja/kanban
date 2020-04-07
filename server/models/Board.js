@@ -5,7 +5,8 @@ const BoardSchema = new Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    creatorEmail: { type: String, required: true }
+    creatorEmail: { type: String, required: true },
+    isDeleted: { type: Boolean, required: true, default: false }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

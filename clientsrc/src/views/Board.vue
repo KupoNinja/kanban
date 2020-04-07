@@ -1,6 +1,7 @@
 <template>
   <div class="board">
     <h1>{{ board.name }}</h1>
+    <p>{{ board.description }}</p>
     <div class="boxes d-flex">
       <!-- REVIEW Placeholder -->
       <div class="m-1" v-for="n in 4" :key="n">
