@@ -1,5 +1,6 @@
 import { Board } from "../models/Board";
 import { $resource } from "./resource";
+import { toastSuccess } from "@bcwdev/quickvue";
 
 export default {
   state: {
@@ -14,8 +15,14 @@ export default {
       state.activeBoard = board;
     },
     addBoard(state, board) {
-      debugger;
       state.boards.push(new Board(board));
+    },
+    removeBoard(state, board) {
+      let i = state.boards.findIndex(b => b.id == board.id);
+      if (i == -1) {
+        return;
+      }
+      state.boards.splice(i, 1);
     }
   },
   actions: {
@@ -34,7 +41,8 @@ export default {
     },
     async removeBoard({ commit }, board) {
       await $resource.delete("api/boards/" + board.id);
-      commit("removeBoard");
+      commit("removeBoard", board);
+      toastSuccess("Board deleted!");
     }
   },
 };

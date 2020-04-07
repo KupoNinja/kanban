@@ -49,9 +49,10 @@ export class BoardsController extends BaseController {
     }
   }
 
-  deleteBoard(req, res, next) {
+  async deleteBoard(req, res, next) {
     try {
-
+      await boardsService.deleteBoard(req.params.boardId);
+      res.send("Board deleted");
     } catch (error) {
       next(error);
     }

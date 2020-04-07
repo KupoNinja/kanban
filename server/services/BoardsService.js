@@ -24,6 +24,13 @@ class BoardsService {
 
     return board;
   }
+
+  async deleteBoard(boardId) {
+    let boardToDelete = await dbContext.Boards.findById(boardId);
+    // @ts-ignore
+    boardToDelete.isDeleted = true;
+    await boardToDelete.save();
+  }
 }
 
 export const boardsService = new BoardsService();

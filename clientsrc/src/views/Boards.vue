@@ -57,7 +57,6 @@ export default {
         return;
       }
       this.$store.dispatch("removeBoard", board);
-      this.$success("Board deleted!");
     }
   }
 };

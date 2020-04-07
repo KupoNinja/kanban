@@ -14,6 +14,7 @@
 <script>
 export default {
   name: "Board",
+  // REVIEW You can see the board info change when you pull up the Board view. I tried beforeMount, no change
   mounted() {
     this.$store.dispatch("getBoard", this.$route.params.boardId);
   },
