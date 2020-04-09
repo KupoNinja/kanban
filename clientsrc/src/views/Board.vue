@@ -2,18 +2,19 @@
   <div class="board">
     <h1>{{ board.name }}</h1>
     <p>{{ board.description }}</p>
-    <div class="boxes d-flex">
-      <!-- REVIEW Placeholder -->
-      <div class="m-1" v-for="n in 4" :key="n">
-        <div class="box">box-{{ n }}</div>
-      </div>
-    </div>
+    <button class="btn btn-primary">+ Add a list</button>
+    <list class="boxes d-flex" />
   </div>
 </template>
 
 <script>
+import List from "../components/List";
+
 export default {
   name: "Board",
+  components: {
+    List
+  },
   // REVIEW You can see the board info change when you pull up the Board view. I tried beforeMount, no change
   mounted() {
     this.$store.dispatch("getBoard", this.$route.params.boardId);
@@ -30,10 +31,5 @@ export default {
 .boxes {
   max-width: 100vw;
   overflow-x: auto;
-}
-.box {
-  min-height: 80vh;
-  width: 200px;
-  background-color: var(--info);
 }
 </style>

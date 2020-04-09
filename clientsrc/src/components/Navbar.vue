@@ -37,6 +37,9 @@ import { ConfigureResource } from "../store/resource";
 
 export default {
   name: "Navbar",
+  components: {
+    UserAvatar
+  },
   computed: {
     profile() {
       return this.$store.state.profile;
@@ -60,9 +63,6 @@ export default {
         redirectTo: window.location.origin
       });
     }
-  },
-  components: {
-    UserAvatar
   }
 };
 </script>
