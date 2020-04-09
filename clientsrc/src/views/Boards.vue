@@ -1,22 +1,9 @@
 <template>
   <div>
     <!-- FIXME extract to a BoardEditorComponent -->
-    <form @submit.prevent="createBoard">
-      <div class="mb-3">
-        <label for="name">Name:</label>
-        <input class="form-control" type="text" v-model="editable.name" />
-      </div>
-      <div class="mb-3">
-        <label for="name">Description:</label>
-        <input class="form-control" type="text" v-model="editable.description" />
-      </div>
-      <div class="my-3">
-        <button class="btn btn-success btn-block">Create Board</button>
-      </div>
-    </form>
-    <!-- FIXME CREATE A BoardCardComponent -->
-    <div class="boards">
-      <div class="card p-2 my-2 elevation-4" v-for="board in boards" :key="board.id">
+    <board-form />
+    <div class="boards d-flex justify-content-start">
+      <div class="card p-2 my-2 elevation-4 mx-2" v-for="board in boards" :key="board.id">
         <board-card :board="board" />
       </div>
     </div>
@@ -24,17 +11,13 @@
 </template>
 
 <script>
-import { Board } from "../models/Board";
+import BoardForm from "../components/BoardForm";
 import BoardCard from "../components/BoardCard";
 
 export default {
   name: "Boards",
-  data() {
-    return {
-      editable: new Board()
-    };
-  },
   components: {
+    BoardForm,
     BoardCard
   },
   computed: {
@@ -45,12 +28,7 @@ export default {
       return this.$store.state.boardsStore.boards;
     }
   },
-  methods: {
-    createBoard() {
-      this.$store.dispatch("createBoard", this.editable);
-      this.editable = new Board();
-    }
-  }
+  methods: {}
 };
 </script>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="board-card">
     <router-link :to="{ name: 'Board', params: { boardId: board.id } }">{{ board.name }}</router-link>
+    <p>{{ board.description }}</p>
     <!-- <div
           class="d-flex align-items-center"
           v-if="$auth.isAuthenticated && $auth.user.email == board.creatorEmail"
