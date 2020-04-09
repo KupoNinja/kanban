@@ -19,6 +19,7 @@ class BoardsService {
   }
 
   async createBoard(boardData) {
+    // REVIEW Shouldn't this be BoardSchema?? Why doesn't BoardSchema work?
     let boardToCreate = new Board(boardData);
     let board = await dbContext.Boards.create(boardToCreate);
 

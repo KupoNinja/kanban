@@ -1,11 +1,8 @@
 <template>
-  <div class="board-card">
+  <!-- Make cards same width -->
+  <div class="board-card text-center">
     <router-link :to="{ name: 'Board', params: { boardId: board.id } }">{{ board.name }}</router-link>
     <p>{{ board.description }}</p>
-    <!-- <div
-          class="d-flex align-items-center"
-          v-if="$auth.isAuthenticated && $auth.user.email == board.creatorEmail"
-    >-->
     <i class="fa fa-fw fa-trash text-muted mr-2 action muted" @click="deleteBoard(board)"></i>
   </div>
 </template>

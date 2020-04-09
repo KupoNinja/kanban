@@ -10,7 +10,7 @@ export class BoardsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getBoards)
       .get("/:boardId", this.getBoard)
-      .post("", this.create)
+      .post("", this.createBoard)
       .delete("/:boardId", this.deleteBoard)
   }
 
@@ -37,7 +37,7 @@ export class BoardsController extends BaseController {
     }
   }
 
-  async create(req, res, next) {
+  async createBoard(req, res, next) {
     try {
       // NOTE Can use ProfileService for this
       req.body.creatorEmail = req.userInfo.email;
