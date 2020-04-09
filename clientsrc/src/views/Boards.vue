@@ -17,12 +17,7 @@
     <!-- FIXME CREATE A BoardCardComponent -->
     <div class="boards">
       <div class="card p-2 my-2 elevation-4" v-for="board in boards" :key="board.id">
-        <router-link :to="{ name: 'Board', params: { boardId: board.id } }">{{ board.name }}</router-link>
-        <!-- <div
-          class="d-flex align-items-center"
-          v-if="$auth.isAuthenticated && $auth.user.email == board.creatorEmail"
-        >-->
-        <i class="fa fa-fw fa-trash text-muted mr-2 action muted" @click="deleteBoard(board)"></i>
+        <board-card :board="board" />
       </div>
     </div>
   </div>
@@ -30,6 +25,7 @@
 
 <script>
 import { Board } from "../models/Board";
+import BoardCard from "../components/BoardCard";
 
 export default {
   name: "Boards",
@@ -37,6 +33,9 @@ export default {
     return {
       editable: new Board()
     };
+  },
+  components: {
+    BoardCard
   },
   computed: {
     profile() {
@@ -50,13 +49,6 @@ export default {
     createBoard() {
       this.$store.dispatch("createBoard", this.editable);
       this.editable = new Board();
-    },
-    async deleteBoard(board) {
-      let yes = await this.$confirm("Delete this board?");
-      if (!yes) {
-        return;
-      }
-      this.$store.dispatch("removeBoard", board);
     }
   }
 };

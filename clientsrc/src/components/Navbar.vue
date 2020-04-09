@@ -34,6 +34,7 @@
 <script>
 import UserAvatar from "./UserAvatar.vue";
 import { ConfigureResource } from "../store/resource";
+
 export default {
   name: "Navbar",
   computed: {

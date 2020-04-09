@@ -13,6 +13,7 @@
 import Navbar from "./components/Navbar.vue";
 import { onAuth } from "@bcwdev/auth0-vue";
 import { ConfigureResource } from "./store/resource";
+
 export default {
   name: "App",
   components: {
