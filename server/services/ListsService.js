@@ -1,6 +1,6 @@
 import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
-// import { List } from "../../clientsrc/src/models/List";
+import { List } from "../../clientsrc/src/models/List";
 
 class ListsService {
   async getListsByBoardId(query = {}) {

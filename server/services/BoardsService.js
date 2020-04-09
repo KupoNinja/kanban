@@ -5,7 +5,6 @@ import { Board } from "../../clientsrc/src/models/Board";
 class BoardsService {
   async getBoards(query = {}) {
     let boards = await dbContext.Boards.find({ ...query, isDeleted: false });
-
     return boards;
   }
 
