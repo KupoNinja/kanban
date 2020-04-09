@@ -2,7 +2,7 @@
   <div class="board">
     <h1>{{ board.name }}</h1>
     <p>{{ board.description }}</p>
-    <button class="btn btn-primary">+ Add a list</button>
+    <button class="btn btn-success" @click="showListForm()">+ Add a list</button>
     <list class="boxes d-flex" />
   </div>
 </template>
@@ -23,6 +23,9 @@ export default {
     board() {
       return this.$store.state.boardsStore.activeBoard;
     }
+  },
+  methods: {
+    // TODO Create showList function
   }
 };
 </script>
