@@ -54,7 +54,7 @@ class SocketService {
   messageUser(userId, eventName, payload) {
     try {
       this.io.to(userId).emit(eventName, payload);
-    } catch (e) {}
+    } catch (e) { }
   }
 
   messageRoom(room, eventName, payload) {
@@ -79,7 +79,7 @@ class SocketService {
           return;
         }
         this.io.emit("UserDisconnected", socket.user.id);
-      } catch (e) {}
+      } catch (e) { }
     };
   }
 
@@ -88,10 +88,10 @@ class SocketService {
       try {
         var action = this[payload.action];
         if (!action || typeof action != "function") {
-          return socket.emit("error", "Unknown Action");
+          return socket.emit("error", { message: "Unknown Action" });
         }
         action.call(this, socket, payload.data);
-      } catch (e) {}
+      } catch (e) { }
     };
   }
 
