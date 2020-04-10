@@ -16,7 +16,6 @@ export class BoardsController extends BaseController {
 
   async getBoards(req, res, next) {
     try {
-      // TODO Create a service for this...
       let boards = await boardsService.getBoards({ creatorEmail: req.userInfo.email });
       res.send(boards);
     } catch (error) {

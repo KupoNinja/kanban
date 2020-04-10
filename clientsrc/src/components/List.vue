@@ -1,5 +1,5 @@
 <template>
-  <div class="lists">
+  <div class="list">
     <div class="m-1" v-for="n in 4" :key="n">
       <div class="box">box-{{ n }}</div>
     </div>
