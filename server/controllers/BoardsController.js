@@ -2,6 +2,7 @@ import BaseController from "../utils/BaseController";
 import Auth0Provider from "@bcwdev/auth0provider";
 import { dbContext } from "../db/DbContext";
 import { boardsService } from "../services/BoardsService";
+import { listsService } from "../services/ListsService";
 
 export class BoardsController extends BaseController {
   constructor() {
@@ -10,6 +11,7 @@ export class BoardsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getBoards)
       .get("/:boardId", this.getBoard)
+      .get("/:boardId/lists", this.getListsByBoardId)
       .post("", this.createBoard)
       .delete("/:boardId", this.deleteBoard)
   }
@@ -31,6 +33,15 @@ export class BoardsController extends BaseController {
         creatorEmail: req.userInfo.email
       });
       res.send(board);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getListsByBoardId(req, res, next) {
+    try {
+      let lists = await listsService.getListsByBoardId(req.params.boardId);
+      res.send(lists);
     } catch (error) {
       next(error);
     }

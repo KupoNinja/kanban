@@ -18,7 +18,7 @@
           />
         </div>
         <!-- REVIEW Button is huge... Why... -->
-        <button class="btn btn-primary" @click="createList()">Submit</button>
+        <button class="btn btn-primary">Submit</button>
       </form>
     </div>
     <list-component class="boxes d-flex" />
@@ -27,7 +27,7 @@
 
 <script>
 import ListComponent from "../components/List";
-import List from "../models/List";
+import { List } from "../models/List";
 
 export default {
   name: "Board",
@@ -37,8 +37,8 @@ export default {
   data() {
     return {
       // FIXME Why can't I add this in... Breaks toggleListInput if I try to add list
-      // list: new List(),
-      toggleListInput: false
+      toggleListInput: false,
+      list: new List()
     };
   },
   // REVIEW You can see the board info change when you pull up the Board view. I tried beforeMount, no change
@@ -48,6 +48,9 @@ export default {
   computed: {
     board() {
       return this.$store.state.boardsStore.activeBoard;
+    },
+    list() {
+      return this.$store.state.listsStore.lists;
     }
   },
   methods: {
@@ -56,8 +59,9 @@ export default {
       this.toggleListInput = true;
     },
     createList() {
-      this.$store.dispatch("createList");
-      // this.list = new List();
+      this.list.boardId = this.$route.params.boardId;
+      this.$store.dispatch("createList", this.list);
+      this.list = new List();
     }
   }
 };

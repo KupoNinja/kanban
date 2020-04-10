@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { $resource } from "./resource";
 import boardsStore from "./BoardsStore";
+import listsStore from "./ListsStore";
 import socketStore from "./SocketStore";
 
 Vue.use(Vuex);
@@ -31,6 +32,7 @@ export default new Vuex.Store({
   },
   modules: {
     boardsStore,
+    listsStore,
     socketStore
   }
 });
