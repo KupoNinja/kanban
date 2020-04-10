@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       // FIXME Why can't I add this in... Breaks toggleListInput if I try to add list
-      list: new List(),
+      // list: new List(),
       toggleListInput: false
     };
   },
