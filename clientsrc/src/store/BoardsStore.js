@@ -44,5 +44,5 @@ export default {
       commit("removeBoard", board);
       toastSuccess("Board deleted!");
     }
-  },
+  }
 };

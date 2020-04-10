@@ -9,8 +9,8 @@ export class ListsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getListsByBoardId)
-    // .get("/:listId", this.getList)
-    // .post("", this.createList)
+      // .get("/:listId", this.getList)
+      .post("", this.createList)
     // .delete("/:listId", this.deleteList)
   }
 
@@ -31,13 +31,16 @@ export class ListsController extends BaseController {
   //   }
   // }
 
-  // async createList(req, res, next) {
-  //   try {
-
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  async createList(req, res, next) {
+    try {
+      req.body.creatorId = req.userInfo.id;
+      // TODO Create a service for this...
+      let list = await listsService.createList(req.body)
+      res.send(list);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   // async deleteList(req, res, next) {
   //   try {

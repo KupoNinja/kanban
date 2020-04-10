@@ -25,5 +25,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+// REVIEW Why isn't this working...
+.board-card {
+  width: 200px;
+}
 </style>

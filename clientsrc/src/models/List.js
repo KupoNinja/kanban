@@ -1,5 +1,4 @@
 export class List {
-  // 
   constructor({
     id = "",
     title = "",
