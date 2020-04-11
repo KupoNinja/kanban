@@ -8,7 +8,7 @@ export class ListsController extends BaseController {
     super("api/lists");
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .get(":/listId/tasks", this.getTasksByListId)
+      .get("/:listId/tasks", this.getTasksByListId)
       // .get("/:listId", this.getList)
       .post("", this.createList)
       .delete("/:listId", this.deleteList)
