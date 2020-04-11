@@ -3,8 +3,8 @@ import { BadRequest } from "../utils/Errors";
 import { List } from "../../clientsrc/src/models/List";
 
 class ListsService {
-  async getListsByBoardId(query = {}) {
-    let lists = await dbContext.Lists.find({ ...query, isDeleted: false });
+  async getListsByBoardId(boardId) {
+    let lists = await dbContext.Lists.find({ boardId: boardId, isDeleted: false });
     return lists;
   }
 
