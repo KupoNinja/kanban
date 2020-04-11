@@ -2,13 +2,13 @@ import { $resource } from "./resource"
 import { Task } from "../models/Task";
 import { toastSuccess } from "@bcwdev/quickvue";
 
+let baseUrl = "api/tasks"
 export default {
   state: {
     tasks: []
   },
   mutations: {
     setTasks(state, tasks = []) {
-      debugger;
       state.tasks = tasks;
     },
     addTask(state, task) {
@@ -16,8 +16,11 @@ export default {
     }
   },
   actions: {
+    // async getTasks({ commit }) {
+    //   let tasks = await $resource.get(baseUrl);
+    //   commit("setTasks", tasks);
+    // },
     async createTask({ commit }, taskData) {
-      debugger;
       let task = await $resource.post("api/tasks/", taskData);
       commit("addTask", task);
       toastSuccess("Added Task!");

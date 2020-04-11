@@ -41,8 +41,8 @@ export default {
   },
   methods: {
     createTask(listId) {
-      debugger;
       this.task.listId = listId;
+      this.task.boardId = this.$route.params.boardId;
       this.$store.dispatch("createTask", this.task);
       this.task = new Task();
     }

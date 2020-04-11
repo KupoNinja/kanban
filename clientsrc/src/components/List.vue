@@ -13,7 +13,11 @@
     <div v-else>
       <task-form :listId="list.id" />
     </div>
-    <div class="list-body"></div>
+    <div class="list-body">
+      <div v-for="task in tasks" :key="task.id">
+        <div :tasks="task">{{ task.title }}</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,11 +42,13 @@ export default {
   },
   mounted() {
     // REVIEW Gets called every time a list is mounted
-    this.$store.dispatch("getTasksByListId", this.list.id);
+    // this.$store.dispatch("getTasksByListId", this.list.id);
   },
   computed: {
+    // REVIEW Just testing getters and using this for v-for="task in tasks"
+    // Linked with trying to get all tasks for a board
     tasks() {
-      return this.$store.tasksStore.getters[this.list.id];
+      return this.$store.getters[this.list.id];
     }
   },
   methods: {
