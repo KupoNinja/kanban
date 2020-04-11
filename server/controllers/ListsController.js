@@ -1,19 +1,18 @@
 import BaseController from "../utils/BaseController";
 import Auth0Provider from "@bcwdev/auth0provider";
-import { dbContext } from "../db/DbContext";
 import { listsService } from "../services/ListsService";
+import { tasksService } from "../services/TasksService";
 
 export class ListsController extends BaseController {
   constructor() {
     super("api/lists");
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
-      // .get("", this.getList)
+      .get(":/listId/tasks", this.getTasksByListId)
       // .get("/:listId", this.getList)
       .post("", this.createList)
       .delete("/:listId", this.deleteList)
   }
-
 
   // async getList(req, res, next) {
   //   try {
@@ -22,6 +21,15 @@ export class ListsController extends BaseController {
   //     next(error);
   //   }
   // }
+
+  async getTasksByListId(req, res, next) {
+    try {
+      let tasks = await tasksService.getTasksByListId(req.params.listId)
+      res.send(tasks);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   async createList(req, res, next) {
     try {

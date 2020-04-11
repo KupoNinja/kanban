@@ -1,12 +1,19 @@
 <template>
-  <div class="list">
-    <div class="d-flex box p-2">
+  <div class="list box">
+    <div class="list-header d-flex p-2">
       <h4>{{ list.title }}</h4>
       <div>
         <button class="btn btn-danger" @click="deleteList(list)">X</button>
       </div>
-      <hr />
     </div>
+    <hr />
+    <div v-if="!toggleTaskInput">
+      <button class="btn btn-success mx-2" @click="toggleTaskInput = true">+ Task</button>
+    </div>
+    <div v-else>
+      <task-form />
+    </div>
+    <div class="list-body"></div>
   </div>
 </template>
 
@@ -16,9 +23,14 @@ import { List } from "../models/List";
 export default {
   name: "List",
   props: {
-    // REVIEW Look into making this the actual model
+    // REVIEW Look into making this the actual model - type: List
     // If you put in List as the type Vue errors saying it expected a List but got an Object
     list: { type: Object, required: true }
+  },
+  data() {
+    return {
+      toggleTaskInput: false
+    };
   },
   methods: {
     async deleteList(list) {
