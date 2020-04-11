@@ -2,54 +2,44 @@
   <div class="board">
     <h1>{{ board.name }}</h1>
     <p>{{ board.description }}</p>
-
     <div v-if="!toggleListInput">
-      <button class="btn btn-success" @click="showListInput()">Add a list</button>
+      <button class="btn btn-success mx-2" @click="showListInput()">Add a list</button>
     </div>
     <div v-else>
-      <form class="d-flex" @submit.prevent="createList">
-        <div class="mx-2">
-          <label for="title"></label>
-          <input
-            class="form-control list-title-input"
-            type="text"
-            v-model="list.title"
-            placeholder="Title"
-          />
-        </div>
-        <!-- REVIEW Button is huge... Why... -->
-        <button class="btn btn-primary">Submit</button>
-      </form>
+      <list-form />
     </div>
-    <list-component class="boxes d-flex" />
+    <hr />
+    <div v-for="list in lists" :key="list.id">
+      <list class="boxes d-flex" :list="list" />
+    </div>
   </div>
 </template>
 
 <script>
-import ListComponent from "../components/List";
-import { List } from "../models/List";
+import List from "../components/List";
+import ListForm from "../components/ListForm";
 
 export default {
   name: "Board",
   components: {
-    ListComponent
+    List,
+    ListForm
   },
   data() {
     return {
-      // FIXME Why can't I add this in... Breaks toggleListInput if I try to add list
-      toggleListInput: false,
-      list: new List()
+      toggleListInput: false
     };
   },
   // REVIEW You can see the board info change when you pull up the Board view. I tried beforeMount, no change
   mounted() {
     this.$store.dispatch("getBoard", this.$route.params.boardId);
+    this.$store.dispatch("getListsByBoardId", this.$route.params.boardId);
   },
   computed: {
     board() {
       return this.$store.state.boardsStore.activeBoard;
     },
-    list() {
+    lists() {
       return this.$store.state.listsStore.lists;
     }
   },
@@ -57,11 +47,6 @@ export default {
     // TODO Create showList function
     showListInput() {
       this.toggleListInput = true;
-    },
-    createList() {
-      this.list.boardId = this.$route.params.boardId;
-      this.$store.dispatch("createList", this.list);
-      this.list = new List();
     }
   }
 };

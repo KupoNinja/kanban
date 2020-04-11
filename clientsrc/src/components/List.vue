@@ -1,14 +1,17 @@
 <template>
   <div class="list">
-    <div class="m-1" v-for="n in 4" :key="n">
-      <div class="box">box-{{ n }}</div>
+    <div class="box">
+      <h4>{{ list.name }}</h4>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "List"
+  name: "List",
+  props: {
+    list: { type: Object, required: true }
+  }
 };
 </script>
 
