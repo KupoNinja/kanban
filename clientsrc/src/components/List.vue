@@ -11,7 +11,7 @@
       <button class="btn btn-success mx-2" @click="toggleTaskInput = true">+ Task</button>
     </div>
     <div v-else>
-      <task-form />
+      <task-form :listId="list.id" />
     </div>
     <div class="list-body"></div>
   </div>
@@ -19,9 +19,13 @@
 
 <script>
 import { List } from "../models/List";
+import TaskForm from "../components/TaskForm";
 
 export default {
   name: "List",
+  components: {
+    TaskForm
+  },
   props: {
     // REVIEW Look into making this the actual model - type: List
     // If you put in List as the type Vue errors saying it expected a List but got an Object

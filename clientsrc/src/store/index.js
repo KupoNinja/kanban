@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import { $resource } from "./resource";
 import boardsStore from "./BoardsStore";
 import listsStore from "./ListsStore";
+import tasksStore from "./TasksStore";
 import socketStore from "./SocketStore";
 
 Vue.use(Vuex);
@@ -33,6 +34,7 @@ export default new Vuex.Store({
   modules: {
     boardsStore,
     listsStore,
+    tasksStore,
     socketStore
   }
 });

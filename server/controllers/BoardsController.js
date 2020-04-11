@@ -27,7 +27,6 @@ export class BoardsController extends BaseController {
 
   async getBoard(req, res, next) {
     try {
-      // TODO Create a service for this...
       let board = await boardsService.getBoard({
         _id: req.params.boardId,
         creatorEmail: req.userInfo.email
@@ -51,7 +50,6 @@ export class BoardsController extends BaseController {
     try {
       // NOTE Can use ProfileService for this
       req.body.creatorEmail = req.userInfo.email;
-      // TODO Create a service for this...
       let board = await boardsService.createBoard(req.body)
       res.send(board);
     } catch (error) {

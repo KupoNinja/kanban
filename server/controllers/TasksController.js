@@ -13,7 +13,6 @@ export class TasksController extends BaseController {
     // .delete("/:taskId", this.deleteTask)
   }
 
-
   // async getTask(req, res, next) {
   //   try {
 
@@ -25,7 +24,6 @@ export class TasksController extends BaseController {
   async createTask(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id;
-      // TODO Create a service for this...
       let task = await tasksService.createTask(req.body)
       res.send(task);
     } catch (error) {
