@@ -1,6 +1,6 @@
 <template>
   <div class="list-form">
-    <form class="d-flex" @submit.prevent="createList">
+    <form class="d-flex align-items-center" @submit.prevent="createList">
       <div class="mx-2">
         <label for="title"></label>
         <input
@@ -10,8 +10,9 @@
           placeholder="Title"
         />
       </div>
-      <!-- REVIEW Button is huge... Why... -->
-      <button class="btn btn-primary">Submit</button>
+      <div>
+        <button class="btn btn-primary">Submit</button>
+      </div>
     </form>
   </div>
 </template>

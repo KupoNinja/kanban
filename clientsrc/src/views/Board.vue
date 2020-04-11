@@ -3,14 +3,16 @@
     <h1>{{ board.name }}</h1>
     <p>{{ board.description }}</p>
     <div v-if="!toggleListInput">
-      <button class="btn btn-success mx-2" @click="showListInput()">Add a list</button>
+      <button class="btn btn-success mx-2" @click="toggleListInput = true">Add a list</button>
     </div>
     <div v-else>
       <list-form />
     </div>
     <hr />
-    <div v-for="list in lists" :key="list.id">
-      <list class="boxes d-flex" :list="list" />
+    <div class="boxes d-flex">
+      <div class="mx-2 mb-2 mt-n2" v-for="list in lists" :key="list.id">
+        <list :list="list" />
+      </div>
     </div>
   </div>
 </template>
@@ -43,12 +45,7 @@ export default {
       return this.$store.state.listsStore.lists;
     }
   },
-  methods: {
-    // TODO Create showList function
-    showListInput() {
-      this.toggleListInput = true;
-    }
-  }
+  methods: {}
 };
 </script>
 
