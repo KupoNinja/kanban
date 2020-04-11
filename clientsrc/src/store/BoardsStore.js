@@ -34,6 +34,7 @@ export default {
       let board = await $resource.get("api/boards/" + id);
       commit("setBoard", board);
     },
+    // REVIEW This knows to call setLists from ListsStore??
     async getListsByBoardId({ commit }, boardId) {
       let lists = await $resource.get("api/boards/" + boardId + "/lists");
       commit("setLists", lists);

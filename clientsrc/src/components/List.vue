@@ -36,6 +36,15 @@ export default {
       toggleTaskInput: false
     };
   },
+  mounted() {
+    // REVIEW Gets called every time a list is mounted
+    this.$store.dispatch("getTasksByListId", this.list.id);
+  },
+  computed: {
+    tasks() {
+      return this.$store.tasksStore.getters[this.list.id];
+    }
+  },
   methods: {
     async deleteList(list) {
       let yes = await this.$confirm("Delete this list?");

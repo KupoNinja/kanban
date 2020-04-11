@@ -22,6 +22,10 @@ export default {
     }
   },
   actions: {
+    async getTasksByListId({ commit }, listId) {
+      let tasks = await $resource.get("api/lists/" + listId + "/tasks");
+      commit("setTasks", tasks);
+    },
     async createList({ commit }, listData) {
       let list = await $resource.post("api/lists/", listData);
       commit("addList", list);
