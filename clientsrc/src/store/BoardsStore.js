@@ -39,6 +39,10 @@ export default {
       let lists = await $resource.get("api/boards/" + boardId + "/lists");
       commit("setLists", lists);
     },
+    async getTasksByBoardId({ commit }, boardId) {
+      let tasks = await $resource.get("api/boards/" + boardId + "/tasks");
+      commit("setTasks", tasks);
+    },
     async createBoard({ commit }, boardData) {
       let board = await $resource.post("api/boards/", boardData);
       commit("addBoard", board);

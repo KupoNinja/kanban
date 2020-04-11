@@ -8,7 +8,8 @@ const TaskSchema = new Schema(
     title: { type: String, required: true },
     content: { type: String, },
     isDeleted: { type: Boolean, required: true, default: false },
-    listId: { type: ObjectId, ref: "List", required: true }
+    listId: { type: ObjectId, ref: "List", required: true },
+    boardId: { type: ObjectId, ref: "Board", required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

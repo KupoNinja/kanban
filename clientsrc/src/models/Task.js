@@ -4,12 +4,14 @@ export class Task {
     title = "",
     content = "",
     creatorId = "",
-    listId = ""
+    listId = "",
+    boardId = ""
   } = {}) {
     this.id = id;
     this.title = title;
     this.content = content;
     this.creatorId = creatorId;
     this.listId = listId;
+    this.boardId = boardId;
   }
 }

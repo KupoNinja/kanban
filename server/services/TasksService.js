@@ -8,6 +8,11 @@ class TasksService {
     return tasks;
   }
 
+  async getTasksByBoardId(boardId) {
+    let tasks = await dbContext.Tasks.find({ boardId: boardId, isDeleted: false });
+    return tasks;
+  }
+
   async createTask(taskData) {
     let task = await dbContext.Tasks.create(new Task(taskData))
     return task;
