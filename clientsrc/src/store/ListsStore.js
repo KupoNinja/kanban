@@ -22,10 +22,6 @@ export default {
     }
   },
   actions: {
-    async getListsByBoardId({ commit }, boardId) {
-      let lists = await $resource.get("api/boards/" + boardId + "/lists");
-      commit("setLists", lists);
-    },
     async createList({ commit }, listData) {
       let list = await $resource.post("api/lists/", listData);
       commit("addList", list);
