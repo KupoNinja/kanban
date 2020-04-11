@@ -19,7 +19,7 @@ export default {
       if (!yes) {
         return;
       }
-      this.$store.dispatch("removeBoard", board);
+      this.$store.dispatch("deleteBoard", board);
     }
   }
 };

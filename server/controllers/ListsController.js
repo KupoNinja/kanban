@@ -11,7 +11,7 @@ export class ListsController extends BaseController {
       // .get("", this.getList)
       // .get("/:listId", this.getList)
       .post("", this.createList)
-    // .delete("/:listId", this.deleteList)
+      .delete("/:listId", this.deleteList)
   }
 
 
@@ -34,11 +34,12 @@ export class ListsController extends BaseController {
     }
   }
 
-  // async deleteList(req, res, next) {
-  //   try {
-
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  async deleteList(req, res, next) {
+    try {
+      let list = await listsService.deleteList(req.params.listId)
+      res.send(list);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

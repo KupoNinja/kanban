@@ -39,7 +39,7 @@ export default {
       commit("addBoard", board);
       // commit("setBoards", board); // REVIEW You may not want this... when creating a board this sets it as the active board
     },
-    async removeBoard({ commit }, board) {
+    async deleteBoard({ commit }, board) {
       await $resource.delete("api/boards/" + board.id);
       commit("removeBoard", board);
       toastSuccess("Board deleted!");

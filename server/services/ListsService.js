@@ -12,6 +12,14 @@ class ListsService {
     let list = await dbContext.Lists.create(new List(listData))
     return list;
   }
+
+  async deleteList(listId) {
+    let listToDelete = await dbContext.Lists.findById(listId);
+    // @ts-ignore
+    listToDelete.isDeleted = true;
+    await listToDelete.save();
+    return listToDelete;
+  }
 }
 
 export const listsService = new ListsService();
