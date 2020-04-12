@@ -15,7 +15,7 @@
     </div>
     <div class="list-body">
       <div v-for="task in tasks" :key="task.id">
-        <div :tasks="task">{{ task.title }}</div>
+        <task-card :task="task" />
       </div>
     </div>
   </div>
@@ -24,11 +24,13 @@
 <script>
 import { List } from "../models/List";
 import TaskForm from "../components/TaskForm";
+import TaskCard from "../components/TaskCard";
 
 export default {
   name: "List",
   components: {
-    TaskForm
+    TaskForm,
+    TaskCard
   },
   props: {
     // REVIEW Look into making this the actual model - type: List
@@ -45,10 +47,9 @@ export default {
     // this.$store.dispatch("getTasksByListId", this.list.id);
   },
   computed: {
-    // REVIEW Just testing getters and using this for v-for="task in tasks"
-    // Linked with trying to get all tasks for a board
+    // REVIEW Very close to doing this correctly
     tasks() {
-      return this.$store.getters[this.list.id];
+      return this.$store.getters.tasks[this.list.id];
     }
   },
   methods: {

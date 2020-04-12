@@ -27,14 +27,15 @@ export default {
     }
   },
   getters: {
-    mappedTasks(state) {
+    tasks(state) {
+      // REVIEW Almost there but this breaks... 
       // iterate over state.tasks and use each listId as a key in an object
-      let mappedTasks = {};
+      let tasks = {};
       state.tasks.forEach(t => {
-        mappedTasks[t.listId] = t;
+        tasks[t.listId] = t;
       });
 
-      return mappedTasks;
+      return tasks;
     }
   }
 }
