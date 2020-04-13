@@ -10,7 +10,7 @@ import { Task } from "../models/Task";
 export default {
   name: "TaskCard",
   props: {
-    task: { type: Object, required: true }
+    task: { type: Task, required: true }
   }
 };
 </script>

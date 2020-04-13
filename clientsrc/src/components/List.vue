@@ -47,7 +47,7 @@ export default {
     // this.$store.dispatch("getTasksByListId", this.list.id);
   },
   computed: {
-    // REVIEW Very close to doing this correctly
+    // REVIEW Very close to doing this correctly... Need to get Task object to pass into TaskCard component
     tasks() {
       return this.$store.getters.tasks[this.list.id];
     }
@@ -60,6 +60,10 @@ export default {
       }
       this.$store.dispatch("deleteList", list);
     }
+    // getTask(task) {
+    //   debugger;
+    //   return Object.values(task.key);
+    // }
   }
 };
 </script>

@@ -28,11 +28,10 @@ export default {
   },
   getters: {
     tasks(state) {
-      // REVIEW Almost there but this breaks... 
-      // iterate over state.tasks and use each listId as a key in an object
+      // REVIEW Only holds one task per listId
       let tasks = {};
       state.tasks.forEach(t => {
-        tasks[t.listId] = t;
+        tasks[t.listId] = new Task(t);
       });
 
       return tasks;
