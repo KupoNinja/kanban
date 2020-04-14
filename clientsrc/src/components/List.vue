@@ -1,5 +1,13 @@
 <template>
-  <div class="list box" droppable="true" @drop.capture="moveTaskToAnotherList" @dragover.prevent>
+  <div
+    class="list box"
+    droppable="true"
+    @drop.capture="moveTaskToAnotherList"
+    @dragenter="dragEnter"
+    @dragleave="dragLeave"
+    @dragover.prevent
+    ref="droppable"
+  >
     <div class="list-header d-flex p-2">
       <h4>{{ list.title }}</h4>
       <div>
@@ -51,8 +59,16 @@ export default {
     }
   },
   methods: {
+    async deleteList(list) {
+      let yes = await this.$confirm("Delete this list?");
+      if (!yes) {
+        return;
+      }
+      this.$store.dispatch("deleteList", list);
+    },
     moveTaskToAnotherList() {
       // Get task from event storage
+      this.$refs.droppable.classList.remove("droppable");
       let task = JSON.parse(event.dataTransfer.getData("data"));
       // Get starting location from event storage
       let from = event.dataTransfer.getData("from");
@@ -63,12 +79,11 @@ export default {
 
       this.$store.dispatch("moveTaskToAnotherList", { task, to: this.list.id });
     },
-    async deleteList(list) {
-      let yes = await this.$confirm("Delete this list?");
-      if (!yes) {
-        return;
-      }
-      this.$store.dispatch("deleteList", list);
+    dragEnter() {
+      this.$refs.droppable.classList.add("droppable");
+    },
+    dragLeave() {
+      this.$refs.droppable.classList.remove("droppable");
     }
   }
 };
@@ -79,5 +94,11 @@ export default {
   min-height: 70vh;
   width: 200px;
   background-color: var(--info);
+}
+
+.droppable {
+  border-style: dashed;
+  border-color: grey;
+  background: var(--primary);
 }
 </style>
