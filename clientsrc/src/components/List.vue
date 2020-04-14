@@ -1,5 +1,5 @@
 <template>
-  <div class="list box">
+  <div class="list box" droppable="true" @drop.capture="moveTaskToAnotherList" @dragover.prevent>
     <div class="list-header d-flex p-2">
       <h4>{{ list.title }}</h4>
       <div>
@@ -40,10 +40,6 @@ export default {
       toggleTaskInput: false
     };
   },
-  mounted() {
-    // REVIEW Gets called every time a list is mounted
-    // this.$store.dispatch("getTasksByListId", this.list.id);
-  },
   computed: {
     tasks() {
       // REVIEW Line below is ok but if you change a task on one list each list will then update
@@ -55,6 +51,18 @@ export default {
     }
   },
   methods: {
+    moveTaskToAnotherList() {
+      // Get task from event storage
+      let task = JSON.parse(event.dataTransfer.getData("data"));
+      // Get starting location from event storage
+      let from = event.dataTransfer.getData("from");
+      // Don't allow drops in the same list
+      if (from == this.list.id) {
+        return;
+      }
+
+      this.$store.dispatch("moveTaskToAnotherList", { task, to: this.list.id });
+    },
     async deleteList(list) {
       let yes = await this.$confirm("Delete this list?");
       if (!yes) {

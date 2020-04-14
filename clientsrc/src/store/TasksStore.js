@@ -14,6 +14,10 @@ export default {
     },
     addTask(state, task) {
       state.tasks.push(new Task(task));
+    },
+    updateTask(state, task) {
+      let index = state.tasks.findIndex(t => t.id == task.id);
+      state.tasks.splice(index, 1, task);
     }
   },
   actions: {
@@ -25,6 +29,12 @@ export default {
       let task = await $resource.post("api/tasks/", taskData);
       commit("addTask", task);
       toastSuccess("Added Task!");
+    },
+    async moveTaskToAnotherList({ commit }, { task, to }) {
+      task.listId = to;
+      let movedTask = await $resource.put("api/tasks/", task);
+
+      commit("updateTask", movedTask);
     }
   },
   getters: {
