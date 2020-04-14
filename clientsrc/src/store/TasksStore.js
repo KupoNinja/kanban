@@ -1,6 +1,7 @@
 import { $resource } from "./resource"
 import { Task } from "../models/Task";
 import { toastSuccess } from "@bcwdev/quickvue";
+import { tasksService } from "../../../server/services/TasksService";
 
 let baseUrl = "api/tasks"
 export default {
@@ -29,12 +30,15 @@ export default {
   getters: {
     tasks(state) {
       // REVIEW Only holds one task per listId
-      let tasks = {};
+      let tasksWithListId = {};
       state.tasks.forEach(t => {
-        tasks[t.listId] = new Task(t);
+        if (!tasksWithListId[t.listId]) {
+          tasksWithListId[t.listId] = [];
+        }
+        tasksWithListId[t.listId].push(t);
       });
 
-      return tasks;
+      return tasksWithListId;
     }
   }
 }

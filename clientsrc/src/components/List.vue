@@ -33,8 +33,6 @@ export default {
     TaskCard
   },
   props: {
-    // REVIEW Look into making this the actual model - type: List
-    // If you put in List as the type Vue errors saying it expected a List but got an Object
     list: { type: Object, required: true }
   },
   data() {
@@ -47,9 +45,13 @@ export default {
     // this.$store.dispatch("getTasksByListId", this.list.id);
   },
   computed: {
-    // REVIEW Very close to doing this correctly... Need to get Task object to pass into TaskCard component
     tasks() {
-      return this.$store.getters.tasks[this.list.id];
+      // REVIEW Line below is ok but if you change a task on one list each list will then update
+      // Using the getter, Vue is smart enough to just update the one list instead of all lists
+      // return this.$store.state.tasksStore.tasks.filter(
+      //   t => t.listId == this.list.id
+      // );
+      return this.$store.getters.tasks[this.list.id] || [];
     }
   },
   methods: {
@@ -60,10 +62,6 @@ export default {
       }
       this.$store.dispatch("deleteList", list);
     }
-    // getTask(task) {
-    //   debugger;
-    //   return Object.values(task.key);
-    // }
   }
 };
 </script>
