@@ -20,7 +20,6 @@ export class CommentsController extends BaseController {
 
   async createComment(req, res, next) {
     try {
-      console.log("Testing Commit Authors");
       req.body.creatorId = req.userInfo.id;
       let comment = await commentsService.createComment(req.body)
       res.send(comment);
