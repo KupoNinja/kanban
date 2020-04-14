@@ -1,5 +1,5 @@
 <template>
-  <div class="list-form d-flex">
+  <div class="list-form">
     <form class="d-flex align-items-center" @submit.prevent="createList">
       <div class="mx-2">
         <label for="title"></label>
@@ -10,13 +10,15 @@
           placeholder="Title"
         />
       </div>
-      <div>
-        <button class="btn btn-primary">Submit</button>
+      <div class="btn-container d-flex">
+        <div>
+          <button class="btn btn-secondary mr-2">Submit</button>
+        </div>
+        <div>
+          <button class="btn btn-danger" @click="closeListForm">Cancel</button>
+        </div>
       </div>
     </form>
-    <div>
-      <button class="btn btn-danger" @click="closeForm">Cancel</button>
-    </div>
   </div>
 </template>
 
@@ -35,10 +37,11 @@ export default {
       this.list.boardId = this.$route.params.boardId;
       this.$store.dispatch("createList", this.list);
       this.list = new List(); // Probably not necessary now
-      this.$emit("closeListInput");
+      closeListForm();
     },
-    closeForm() {
-      this.$emit("closeListInput");
+    // REVIEW Look for alternative to implement cancel button within same form to fix warning
+    closeListForm() {
+      this.$emit("closeListForm");
     }
   }
 };

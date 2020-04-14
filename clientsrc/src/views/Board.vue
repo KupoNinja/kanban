@@ -6,7 +6,7 @@
       <button class="btn btn-success mx-2" @click="toggleListInput = true">Add a list</button>
     </div>
     <div v-else>
-      <list-form @closeListInput="toggleListInput=false" />
+      <list-form @closeListForm="toggleListInput=false" />
     </div>
     <hr />
     <div class="boxes d-flex">

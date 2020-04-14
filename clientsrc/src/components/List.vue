@@ -19,7 +19,7 @@
       <button class="btn btn-success mx-2" @click="toggleTaskInput = true">+ Task</button>
     </div>
     <div v-else>
-      <task-form :listId="list.id" />
+      <task-form @closeTaskForm="toggleTaskInput=false" :listId="list.id" />
     </div>
     <div class="list-body">
       <div v-for="task in tasks" :key="task.id">
