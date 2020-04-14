@@ -1,5 +1,5 @@
 <template>
-  <div class="list-form">
+  <div class="list-form d-flex">
     <form class="d-flex align-items-center" @submit.prevent="createList">
       <div class="mx-2">
         <label for="title"></label>
@@ -14,6 +14,9 @@
         <button class="btn btn-primary">Submit</button>
       </div>
     </form>
+    <div>
+      <button class="btn btn-danger" @click="closeForm">Cancel</button>
+    </div>
   </div>
 </template>
 
@@ -31,7 +34,11 @@ export default {
     createList() {
       this.list.boardId = this.$route.params.boardId;
       this.$store.dispatch("createList", this.list);
-      this.list = new List();
+      this.list = new List(); // Probably not necessary now
+      this.$emit("closeListInput");
+    },
+    closeForm() {
+      this.$emit("closeListInput");
     }
   }
 };
