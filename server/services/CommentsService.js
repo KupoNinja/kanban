@@ -1,5 +1,6 @@
 import { dbContext } from "../db/DbContext";
 import { BadRequest } from "../utils/Errors";
+import { Comment } from "../../clientsrc/src/models/Comment";
 
 class CommentsService {
   async createComment(commentData) {
