@@ -6,6 +6,8 @@ import store from './store';
 import { Auth0Plugin } from "@bcwdev/auth0-vue";
 import { domain, clientId, audience } from "./AuthConfig.js";
 import { QuickVue } from "@bcwdev/quickvue";
+import "./baseComponents"; // REVIEW Registers your file to be used globally
+import "./eventBus";
 
 Vue.use(QuickVue);
 
