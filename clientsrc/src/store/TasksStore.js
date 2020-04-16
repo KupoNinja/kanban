@@ -3,7 +3,8 @@ import { Task } from "../models/Task";
 import { toastSuccess } from "@bcwdev/quickvue";
 import { tasksService } from "../../../server/services/TasksService";
 
-let baseUrl = "api/tasks"
+const baseUrl = "api/tasks/"
+
 export default {
   state: {
     tasks: []
@@ -28,27 +29,23 @@ export default {
     }
   },
   actions: {
-    // async getTasks({ commit }) {
-    //   let tasks = await $resource.get(baseUrl);
-    //   commit("setTasks", tasks);
-    // },
     async getCommentsByTaskId({ commit }, taskId) {
-      let comments = await $resource.get("api/tasks/" + taskId + "/comments")
+      let comments = await $resource.get(baseUrl + taskId + "/comments")
       commit("setComments", comments);
     },
     async createTask({ commit }, taskData) {
-      let task = await $resource.post("api/tasks/", taskData);
+      let task = await $resource.post(baseUrl, taskData);
       commit("addTask", task);
       toastSuccess("Added Task!");
     },
     async deleteTask({ commit }, task) {
-      await $resource.delete("api/tasks/" + task.id);
+      await $resource.delete(baseUrl + task.id);
       commit("removeTask", task);
       toastSuccess("Task deleted!");
     },
     async moveTaskToAnotherList({ commit }, { task, to }) {
       task.listId = to;
-      let movedTask = await $resource.put("api/tasks/", task);
+      let movedTask = await $resource.put(baseUrl, task);
 
       commit("updateTask", movedTask);
     }
