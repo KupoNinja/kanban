@@ -8,22 +8,28 @@
     @dragover.prevent
     ref="droppable"
   >
-    <div class="list-header d-flex p-2">
+    <div class="list-header d-flex p-2 justify-content-between">
       <h4>{{ list.title }}</h4>
-      <div>
-        <button class="btn btn-danger" @click="deleteList(list)">X</button>
-      </div>
+      <button
+        type="button"
+        class="close"
+        @click="deleteList(list)"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
     <hr />
-    <div v-if="!toggleTaskInput">
-      <button class="btn btn-success mx-2" @click="toggleTaskInput = true">+ Task</button>
-    </div>
-    <div v-else>
-      <task-form @closeTaskForm="toggleTaskInput=false" :listId="list.id" />
-    </div>
     <div class="list-body">
+      <div v-if="!toggleTaskInput">
+        <button class="btn btn-success mx-2" @click="toggleTaskInput = true">+ Task</button>
+      </div>
+      <div v-else>
+        <task-form @closeTaskForm="toggleTaskInput=false" :listId="list.id" />
+      </div>
       <div v-for="task in tasks" :key="task.id">
-        <task-card :task="task" />
+        <task-card :task="task" @openTaskDetailsModal="openTaskDetailsModal" />
       </div>
     </div>
   </div>
@@ -45,7 +51,9 @@ export default {
   },
   data() {
     return {
-      toggleTaskInput: false
+      toggleTaskInput: false,
+      open: false,
+      activeTask: {}
     };
   },
   computed: {
@@ -65,6 +73,10 @@ export default {
         return;
       }
       this.$store.dispatch("deleteList", list);
+    },
+    // FIXME Remove this
+    openTaskDetailsModal(task) {
+      this.$emit("openTaskDetailsModal", task);
     },
     moveTaskToAnotherList() {
       // Get task from event storage
@@ -90,6 +102,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// .task-details-modal {
+//   display: none;
+//   .open {
+//     display: block;
+//     position: fixed;
+//     min-height: 500px;
+//     min-width: 80vw;
+//     background: white;
+//     border: 1px solid red;
+//   }
+// }
+
 .box {
   min-height: 70vh;
   width: 200px;

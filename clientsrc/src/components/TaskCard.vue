@@ -1,6 +1,7 @@
 <template>
   <div
     class="card task-card m-2"
+    @click="openTaskDetailsModal"
     draggable="true"
     @dragstart.capture="moving"
     @dragend="dragEnd"
@@ -20,6 +21,10 @@ export default {
     task: { type: Object, required: true }
   },
   methods: {
+    // FIXME Remove this
+    openTaskDetailsModal() {
+      this.$emit("openTaskDetailsModal", this.task);
+    },
     moving() {
       let from = this.listId;
       event.dataTransfer.setData("data", JSON.stringify(this.task));

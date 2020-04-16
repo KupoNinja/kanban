@@ -1,29 +1,37 @@
 <template>
   <div
     class="task-details-modal modal fade show"
-    id="exampleModalCenter"
+    id="globalModal"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="exampleModalCenterTitle"
+    aria-labelledby="modalTitle"
     aria-hidden="true"
     :style="{display: isOpen ? 'block': 'none'}"
   >
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <h5 class="modal-title" id="ModalTitle">Modal title</h5>
+          <button
+            type="button"
+            class="close"
+            @click="closeModal"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <div class="task-details-content">...</div>
+          <div class="task-details-content">
+            <p></p>
+          </div>
         </div>
         <div class="modal-footer">
           <button
             type="button"
             class="btn btn-secondary"
-            @click="openTaskDetails=false"
+            @click="closeModal"
             data-dismiss="modal"
           >Close</button>
           <button type="button" class="btn btn-primary">Save changes</button>
@@ -38,6 +46,18 @@ export default {
   name: "Modal",
   props: {
     isOpen: { type: Boolean, default: false }
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    async closeModal() {
+      let yes = await this.$confirm("Are you sure you want to close?");
+      if (!yes) {
+        return;
+      }
+      this.$emit("closeModal");
+    }
   }
 };
 </script>

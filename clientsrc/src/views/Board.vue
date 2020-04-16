@@ -11,9 +11,10 @@
     <hr />
     <div class="boxes d-flex">
       <div class="mx-2 mb-2 mt-n2" v-for="list in lists" :key="list.id">
-        <list :list="list" />
+        <list :list="list" @openTaskDetailsModal="openTaskDetailsModal" />
       </div>
     </div>
+    <modal :isOpen="isOpen" @closeModal="closeModal" />
   </div>
 </template>
 
@@ -29,7 +30,9 @@ export default {
   },
   data() {
     return {
-      toggleListInput: false
+      toggleListInput: false,
+      isOpen: false,
+      activeTask: {}
     };
   },
   // REVIEW You can see the board info change when you pull up the Board view. I tried beforeMount, no change
@@ -46,7 +49,16 @@ export default {
       return this.$store.state.listsStore.lists;
     }
   },
-  methods: {}
+  methods: {
+    openTaskDetailsModal(task) {
+      console.log("In board", task);
+      this.isOpen = true;
+      this.activeTask = task;
+    },
+    closeModal() {
+      this.isOpen = false;
+    }
+  }
 };
 </script>
 
