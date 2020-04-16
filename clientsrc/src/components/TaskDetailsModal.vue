@@ -59,8 +59,8 @@ import CommentForm from "../components/CommentForm";
 export default {
   name: "TaskDetailsModal",
   components: {
-    Comment,
-    CommentForm
+    CommentForm,
+    Comment
   },
   props: {
     task: { type: Object, required: true },
@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     comments() {
-      this.$store.state.comments;
+      this.$store.state.commentsStore.comments;
     }
   },
   methods: {

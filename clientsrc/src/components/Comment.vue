@@ -1,5 +1,6 @@
 <template>
   <div class="comment">
+    <p>{{ comment.content }}</p>
     <p>This is a comment</p>
   </div>
 </template>
@@ -8,7 +9,7 @@
 export default {
   name: "Comment",
   props: {
-    // comment: { type: Object, required: true }
+    comment: { type: Object, required: true }
   }
 };
 </script>
