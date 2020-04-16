@@ -14,10 +14,7 @@
         <list :list="list" @openTaskDetailsModal="openTaskDetailsModal" />
       </div>
     </div>
-    <task-details-modal :isOpen="isOpen" @closeModal="closeModal" :task="activeTask">
-      <div slot="title">{{ activeTask.title }}</div>
-      <div>{{ activeTask.content }}</div>
-    </task-details-modal>
+    <task-details-modal :isOpen="isOpen" @closeModal="closeModal" :task="activeTask" />
     <!-- <modal :isOpen="isOpen" @closeModal="closeModal">
       <div slot="title">{{ activeTask.title }}</div>
       <div>{{ activeTask.content }}</div>

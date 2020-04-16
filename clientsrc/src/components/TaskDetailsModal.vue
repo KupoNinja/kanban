@@ -12,9 +12,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="ModalTitle">
-            <slot name="title"></slot>
-          </h5>
+          <h5 class="modal-title" id="ModalTitle">{{ task.title }}</h5>
           <button
             type="button"
             class="close"
@@ -27,7 +25,7 @@
         </div>
         <div class="modal-body">
           <div class="task-details-content">
-            <slot></slot>
+            <p>{{ task.content }}</p>
           </div>
           <div v-for="comment in comments" :key="comment.id">
             <comment :comment="comment" />
@@ -90,6 +88,8 @@ export default {
       //   return;
       // }
       this.$emit("closeModal");
+      this.$store.dispatch("clearComments");
+      // TODO Hide comments save button
     }
   }
 };

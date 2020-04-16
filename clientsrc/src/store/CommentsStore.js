@@ -11,12 +11,18 @@ export default {
     },
     addComment(state, comment) {
       state.comments.push(new Comment(comment));
+    },
+    clearComments(state) {
+      state.comments = [];
     }
   },
   actions: {
     async createComment({ commit }, commentData) {
       let comment = await $resource.post("api/comments/", commentData);
       commit("addComment", comment);
+    },
+    clearComments({ commit }) {
+      commit("clearComments");
     }
   }
 }
