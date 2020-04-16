@@ -4,6 +4,7 @@ import { $resource } from "./resource";
 import boardsStore from "./BoardsStore";
 import listsStore from "./ListsStore";
 import tasksStore from "./TasksStore";
+import commentsStore from "./CommentsStore";
 import socketStore from "./SocketStore";
 
 Vue.use(Vuex);
@@ -35,6 +36,7 @@ export default new Vuex.Store({
     boardsStore,
     listsStore,
     tasksStore,
+    commentsStore,
     socketStore
   }
 });
