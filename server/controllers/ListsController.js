@@ -2,6 +2,7 @@ import BaseController from "../utils/BaseController";
 import Auth0Provider from "@bcwdev/auth0provider";
 import { listsService } from "../services/ListsService";
 import { tasksService } from "../services/TasksService";
+import { UnAuthorized } from "../utils/Errors";
 
 export class ListsController extends BaseController {
   constructor() {
@@ -14,6 +15,7 @@ export class ListsController extends BaseController {
       .delete("/:listId", this.deleteList)
   }
 
+  // TODO Get list for side panel
   // async getList(req, res, next) {
   //   try {
 
@@ -43,8 +45,9 @@ export class ListsController extends BaseController {
 
   async deleteList(req, res, next) {
     try {
-      let list = await listsService.deleteList(req.params.listId)
-      res.send(list);
+      if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this list");
+      await listsService.deleteList(req.params.listId)
+      res.send("List Deleted");
     } catch (error) {
       next(error);
     }

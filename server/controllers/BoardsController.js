@@ -4,6 +4,7 @@ import { dbContext } from "../db/DbContext";
 import { boardsService } from "../services/BoardsService";
 import { listsService } from "../services/ListsService";
 import { tasksService } from "../services/TasksService";
+import { UnAuthorized } from "../utils/Errors";
 
 export class BoardsController extends BaseController {
   constructor() {
@@ -70,6 +71,7 @@ export class BoardsController extends BaseController {
 
   async deleteBoard(req, res, next) {
     try {
+      if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this board");
       await boardsService.deleteBoard(req.params.boardId);
       res.send("Board deleted");
     } catch (error) {
