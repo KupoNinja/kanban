@@ -5,7 +5,7 @@ const ObjectId = Schema.Types.ObjectId;
 const CommentSchema = new Schema(
   {
     creatorId: { type: String, required: true },
-    content: { type: String, },
+    content: { type: String, required: true },
     isDeleted: { type: Boolean, required: true, default: false },
     taskId: { type: ObjectId, ref: "Task", required: true }
   },
