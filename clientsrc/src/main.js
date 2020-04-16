@@ -7,7 +7,7 @@ import { Auth0Plugin } from "@bcwdev/auth0-vue";
 import { domain, clientId, audience } from "./AuthConfig.js";
 import { QuickVue } from "@bcwdev/quickvue";
 import "./baseComponents"; // REVIEW Registers your file to be used globally
-import "./eventBus";
+import "./eventBus"; // REVIEW State itself is actually an eventBus... Read up on this
 
 Vue.use(QuickVue);
 
