@@ -21,7 +21,6 @@ export default {
     task: { type: Object, required: true }
   },
   methods: {
-    // FIXME Remove this
     openTaskDetailsModal() {
       this.$emit("openTaskDetailsModal", this.task);
     },

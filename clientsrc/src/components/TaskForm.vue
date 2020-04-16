@@ -1,6 +1,6 @@
 <template>
   <div class="task-form">
-    <form class="align-items-center" @submit.prevent="createTask(listId)">
+    <form class="align-items-center" @submit.prevent="createTask">
       <div class="mx-2">
         <label for="title"></label>
         <input
@@ -45,14 +45,13 @@ export default {
     };
   },
   methods: {
-    createTask(listId) {
-      this.task.listId = listId;
+    createTask() {
+      this.task.listId = this.listId;
       this.task.boardId = this.$route.params.boardId;
       this.$store.dispatch("createTask", this.task);
       this.task = new Task();
       this.closeTaskForm();
     },
-    // REVIEW Look for alternative to implement cancel button within same form to fix warning
     closeTaskForm() {
       this.$emit("closeTaskForm");
     }

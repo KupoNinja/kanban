@@ -58,7 +58,7 @@ export default {
   },
   computed: {
     tasks() {
-      // REVIEW Line below is ok but if you change a task on one list each list will then update
+      // NOTE Line below is ok but if you change a task on one list each list will then update
       // Using the getter, Vue is smart enough to just update the one list instead of all lists
       // return this.$store.state.tasksStore.tasks.filter(
       //   t => t.listId == this.list.id
@@ -74,7 +74,6 @@ export default {
       }
       this.$store.dispatch("deleteList", list);
     },
-    // FIXME Remove this
     openTaskDetailsModal(task) {
       this.$emit("openTaskDetailsModal", task);
     },
