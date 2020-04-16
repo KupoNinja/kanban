@@ -1,6 +1,7 @@
 import BaseController from "../utils/BaseController";
 import Auth0Provider from "@bcwdev/auth0provider";
 import { tasksService } from "../services/TasksService";
+import { commentsService } from "../services/CommentsService"
 
 export class TasksController extends BaseController {
   constructor() {
@@ -9,9 +10,10 @@ export class TasksController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       // .get("", this.getTasks)
       // .get("/:taskId", this.getTask)
+      .get("/:taskId/comments", this.getCommentsByTaskId)
       .post("", this.createTask)
       .put("", this.updateTask)
-    // .delete("/:taskId", this.deleteTask)
+      .delete("/:taskId", this.deleteTask)
   }
 
   // async getTask(req, res, next) {
@@ -21,6 +23,14 @@ export class TasksController extends BaseController {
   //     next(error);
   //   }
   // }
+  async getCommentsByTaskId(req, res, next) {
+    try {
+      let comments = await commentsService.getCommentsByTaskId(req.params.taskId);
+      res.send(comments);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   async createTask(req, res, next) {
     try {
@@ -43,6 +53,7 @@ export class TasksController extends BaseController {
 
   async deleteTask(req, res, next) {
     try {
+      // if (req.body) TODO Check for creatorId
       let task = await tasksService.deleteTask(req.params.taskId)
       res.send(task);
     } catch (error) {

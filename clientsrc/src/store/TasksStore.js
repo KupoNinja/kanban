@@ -18,6 +18,13 @@ export default {
     updateTask(state, task) {
       let index = state.tasks.findIndex(t => t.id == task.id);
       state.tasks.splice(index, 1, task);
+    },
+    removeTask(state, task) {
+      let i = state.tasks.findIndex(b => b.id == task.id);
+      if (i == -1) {
+        return;
+      }
+      state.tasks.splice(i, 1);
     }
   },
   actions: {
@@ -25,10 +32,19 @@ export default {
     //   let tasks = await $resource.get(baseUrl);
     //   commit("setTasks", tasks);
     // },
+    async getCommentsByTaskId({ commit }, taskId) {
+      let comments = await $resource.get("api/tasks/" + taskId + "/comments")
+      commit("setComments", comments);
+    },
     async createTask({ commit }, taskData) {
       let task = await $resource.post("api/tasks/", taskData);
       commit("addTask", task);
       toastSuccess("Added Task!");
+    },
+    async deleteTask({ commit }, task) {
+      await $resource.delete("api/tasks/" + task.id);
+      commit("removeTask", task);
+      toastSuccess("Task deleted!");
     },
     async moveTaskToAnotherList({ commit }, { task, to }) {
       task.listId = to;
