@@ -32,6 +32,7 @@
           <div v-for="comment in comments" :key="comment.id">
             <comment :comment="comment" />
           </div>
+          <comment-form :task="task" />
         </div>
         <div class="modal-footer d-flex justify-content-between">
           <div class="col-2">
@@ -54,11 +55,13 @@
 
 <script>
 import Comment from "../components/Comment";
+import CommentForm from "../components/CommentForm";
 
 export default {
   name: "Modal",
   components: {
-    Comment
+    Comment,
+    CommentForm
   },
   props: {
     task: { type: Object, required: true },
