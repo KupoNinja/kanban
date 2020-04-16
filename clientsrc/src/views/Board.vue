@@ -14,19 +14,28 @@
         <list :list="list" @openTaskDetailsModal="openTaskDetailsModal" />
       </div>
     </div>
-    <modal :isOpen="isOpen" @closeModal="closeModal" />
+    <task-details-modal :isOpen="isOpen" @closeModal="closeModal" :task="activeTask">
+      <div slot="title">{{ activeTask.title }}</div>
+      <div>{{ activeTask.content }}</div>
+    </task-details-modal>
+    <!-- <modal :isOpen="isOpen" @closeModal="closeModal">
+      <div slot="title">{{ activeTask.title }}</div>
+      <div>{{ activeTask.content }}</div>
+    </modal>-->
   </div>
 </template>
 
 <script>
 import List from "../components/List";
 import ListForm from "../components/ListForm";
+import TaskDetailsModal from "../components/TaskDetailsModal";
 
 export default {
   name: "Board",
   components: {
     List,
-    ListForm
+    ListForm,
+    TaskDetailsModal
   },
   data() {
     return {
@@ -51,9 +60,9 @@ export default {
   },
   methods: {
     openTaskDetailsModal(task) {
-      console.log("In board", task);
       this.isOpen = true;
       this.activeTask = task;
+      this.$store.dispatch("getCommentsByTaskId", this.activeTask.id);
     },
     closeModal() {
       this.isOpen = false;
