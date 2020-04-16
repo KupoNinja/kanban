@@ -50,7 +50,7 @@ export default {
       this.task.boardId = this.$route.params.boardId;
       this.$store.dispatch("createTask", this.task);
       this.task = new Task();
-      closeTaskForm();
+      this.closeTaskForm();
     },
     // REVIEW Look for alternative to implement cancel button within same form to fix warning
     closeTaskForm() {
