@@ -45,7 +45,8 @@ export class TasksController extends BaseController {
 
   async deleteTask(req, res, next) {
     try {
-      if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this task");
+      // REVIEW Design decision... Ok to validate in service? This is receiving a task Id not a task object to verify against creator Id
+      // if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this task");
       await tasksService.deleteTask(req.params.taskId)
       res.send("Task deleted!");
     } catch (error) {

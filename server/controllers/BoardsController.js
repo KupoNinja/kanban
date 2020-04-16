@@ -71,7 +71,8 @@ export class BoardsController extends BaseController {
 
   async deleteBoard(req, res, next) {
     try {
-      if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this board");
+      // REVIEW See TasksController
+      // if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this board");
       await boardsService.deleteBoard(req.params.boardId);
       res.send("Board deleted");
     } catch (error) {

@@ -45,7 +45,8 @@ export class ListsController extends BaseController {
 
   async deleteList(req, res, next) {
     try {
-      if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this list");
+      // REVIEW See TasksController
+      // if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this list");
       await listsService.deleteList(req.params.listId)
       res.send("List Deleted");
     } catch (error) {
