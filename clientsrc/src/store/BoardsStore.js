@@ -46,6 +46,7 @@ export default {
     async createBoard({ commit }, boardData) {
       let board = await $resource.post("api/boards/", boardData);
       commit("addBoard", board);
+      toastSuccess("Board created!");
       // commit("setBoards", board); // REVIEW You may not want this... when creating a board this sets it as the active board
     },
     async deleteBoard({ commit }, board) {
