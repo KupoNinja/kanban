@@ -29,6 +29,7 @@ export default {
     async createList({ commit }, listData) {
       let list = await $resource.post("api/lists/", listData);
       commit("addList", list);
+      toastSuccess("List created!");
     },
     async deleteList({ commit }, list) {
       let listToDelete = await $resource.delete("api/lists/" + list.id);

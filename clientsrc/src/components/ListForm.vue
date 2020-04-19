@@ -36,8 +36,8 @@ export default {
     createList() {
       this.list.boardId = this.$route.params.boardId;
       this.$store.dispatch("createList", this.list);
-      this.list = new List(); // Probably not necessary now
-      closeListForm();
+      // this.list = new List(); // Probably not necessary now
+      this.closeListForm();
     },
     // REVIEW Look for alternative to implement cancel button within same form to fix warning
     closeListForm() {

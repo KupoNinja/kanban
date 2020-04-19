@@ -3,7 +3,7 @@
 
 import vue from "vue";
 // @ts-ignore
-import Modal from "./components/Modal.vue";
+import Modal from "./components/shared/Modal.vue";
 
 // Can use any name here
 vue.component("modal", Modal);

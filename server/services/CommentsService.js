@@ -11,6 +11,13 @@ class CommentsService {
     let comment = await dbContext.Comments.create(new Comment(commentData))
     return comment;
   }
+  async deleteComment(commentId) {
+    let commentToDelete = await dbContext.Comments.findById(commentId);
+    // @ts-ignore
+    commentToDelete.isDeleted = true;
+    await commentToDelete.save();
+    return commentToDelete;
+  }
 }
 
 export const commentsService = new CommentsService();
