@@ -15,6 +15,13 @@ export default {
     },
     clearComments(state) {
       state.comments = [];
+    },
+    removeComment(state, comment) {
+      let i = state.comments.findIndex(c => c.id == comment.id);
+      if (i == -1) {
+        return;
+      }
+      state.comments.splice(i, 1);
     }
   },
   actions: {
@@ -25,6 +32,11 @@ export default {
     },
     clearComments({ commit }) {
       commit("clearComments");
+    },
+    async deleteComment({ commit }, comment) {
+      await $resource.delete("api/comments/" + comment.id);
+      commit("removeComment", comment);
+      toastSuccess("Comment deleted!");
     }
   }
 }
