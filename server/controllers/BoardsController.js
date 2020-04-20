@@ -12,11 +12,23 @@ export class BoardsController extends BaseController {
     this.router
       .use(Auth0Provider.getAuthorizedUserInfo)
       .get("", this.getBoards)
+      .post("", this.createBoard)
+      .use("/:boardId", this.validateCreator)
       .get("/:boardId", this.getBoard)
       .get("/:boardId/lists", this.getListsByBoardId)
       .get("/:boardId/tasks", this.getTasksByBoardId)
-      .post("", this.createBoard)
       .delete("/:boardId", this.deleteBoard)
+  }
+
+  async validateCreator(req, res, next) {
+    try {
+      req.board = await boardsService.getBoard({ _id: req.params.boardId, creatorEmail: req.userInfo.email })
+      // NOTE next() allows the router to move down the line into normal route handlers
+      next();
+    } catch (error) {
+      // NOTE this next() sends teh request to only error handlers
+      next(error);
+    }
   }
 
   async getBoards(req, res, next) {
@@ -30,11 +42,8 @@ export class BoardsController extends BaseController {
 
   async getBoard(req, res, next) {
     try {
-      let board = await boardsService.getBoard({
-        _id: req.params.boardId,
-        creatorEmail: req.userInfo.email
-      });
-      res.send(board);
+      // NOTE Getting board from validateCreator
+      res.send(req.board);
     } catch (error) {
       next(error);
     }
@@ -72,7 +81,6 @@ export class BoardsController extends BaseController {
   async deleteBoard(req, res, next) {
     try {
       // REVIEW See TasksController
-      // if (req.body.creatorId != req.userInfo.id) throw new UnAuthorized("Unauthorized to delete this board");
       await boardsService.deleteBoard(req.params.boardId);
       res.send("Board deleted");
     } catch (error) {
