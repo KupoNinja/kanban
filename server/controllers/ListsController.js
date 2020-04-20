@@ -35,7 +35,7 @@ export class ListsController extends BaseController {
 
   async createList(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id;
+      req.body.creatorId = req.userInfo.sub;
       let list = await listsService.createList(req.body)
       res.send(list);
     } catch (error) {
