@@ -19,6 +19,7 @@ class BoardsService {
 
   async createBoard(boardData) {
     // REVIEW Shouldn't this be BoardSchema?? Why doesn't BoardSchema work?
+    // Answer: Schema is what MongoDB uses. You can use your models across frontend and backend but you have to be careful.
     let boardToCreate = new Board(boardData);
     let board = await dbContext.Boards.create(boardToCreate);
 
