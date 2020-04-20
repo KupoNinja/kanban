@@ -13,6 +13,7 @@
       <button
         type="button"
         class="close"
+        v-if="$auth.isAuthenticated && $auth.user.sub == list.creatorId"
         @click="deleteList(list)"
         data-dismiss="modal"
         aria-label="Close"
