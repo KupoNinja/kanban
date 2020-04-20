@@ -27,15 +27,21 @@
           <div class="task-details-content">
             <p>{{ task.content }}</p>
           </div>
+          <hr />
+          <comment-form :task="task" />
+          <hr />
+          <h5>Comments</h5>
           <div v-for="comment in comments" :key="comment.id">
             <comment :comment="comment" />
           </div>
-          <hr />
-          <comment-form :task="task" />
         </div>
         <div class="modal-footer d-flex justify-content-between">
           <div class="col-2">
-            <i class="fa fa-fw fa-trash text-muted mr-2 action muted" @click="deleteTask"></i>
+            <i
+              class="fa fa-fw fa-trash text-muted mr-2 action muted"
+              v-if="$auth.isAuthenticated && $auth.user.sub == task.creatorId"
+              @click="deleteTask"
+            ></i>
           </div>
           <div>
             <button
@@ -68,13 +74,11 @@ export default {
   },
   computed: {
     comments() {
-      this.$store.state.commentsStore.comments;
+      return this.$store.state.commentsStore.comments;
     }
   },
   methods: {
     async deleteTask() {
-      // REVIEW Figure out why this doesn't work when trying to use in button to delete
-      // v-if="$auth.isAuthenticated && $auth.user.id == this.task.creatorId"
       let yes = await this.$confirm("Delete this task?");
       if (!yes) {
         return;
