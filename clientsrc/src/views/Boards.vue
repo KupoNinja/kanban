@@ -1,8 +1,7 @@
 <template>
   <div>
     <board-form />
-    <div class="boards d-flex justify-content-start">
-      <!-- FIXME Limit board-cards per row - Adding lots of cards shrinks card and makes content spill out -->
+    <div class="boards d-flex flex-wrap justify-content-start">
       <div class="card p-2 my-2 elevation-4 mx-2" v-for="board in boards" :key="board.id">
         <board-card :board="board" />
       </div>

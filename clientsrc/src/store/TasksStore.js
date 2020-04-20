@@ -1,7 +1,6 @@
 import { $resource } from "./resource"
 import { Task } from "../models/Task";
 import { toastSuccess } from "@bcwdev/quickvue";
-import { tasksService } from "../../../server/services/TasksService";
 
 const baseUrl = "api/tasks/"
 
@@ -46,7 +45,6 @@ export default {
     async moveTaskToAnotherList({ commit }, { task, to }) {
       task.listId = to;
       let movedTask = await $resource.put(baseUrl, task);
-
       commit("updateTask", movedTask);
     }
   },

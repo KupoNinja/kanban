@@ -12,7 +12,7 @@
         />
       </div>
       <div>
-        <button v-if="showSave" class="btn btn-secondary mt-2 ml-2" @click="createComment">Save</button>
+        <button v-if="showSave" class="btn btn-secondary mt-2 ml-2">Save</button>
       </div>
     </form>
   </div>
