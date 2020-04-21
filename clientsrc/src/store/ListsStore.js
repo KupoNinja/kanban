@@ -32,8 +32,8 @@ export default {
       toastSuccess("List created!");
     },
     async deleteList({ commit }, list) {
-      let listToDelete = await $resource.delete("api/lists/" + list.id);
-      commit("removeList", listToDelete);
+      await $resource.delete("api/lists/" + list.id);
+      commit("removeList", list);
       toastSuccess("List deleted!");
     }
   }
